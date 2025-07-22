@@ -36,7 +36,8 @@ type QuizProgressAppProps = {
   user: {
     id: string;
     name: string;
-    email?: string;
+    email: string;
+    image: string;
   };
 };
 
@@ -96,9 +97,23 @@ const DIFFICULTY_STYLES: DifficultyStyles = {
   3: { label: 'Hard', class: 'bg-red-500/20 text-red-400' }
 };
 
+type User = {
+  id: string;
+  name?: string;
+  // email?: string;
+  image?: string;
+};
+
+
+type Status = {
+  id: string;
+  userId: string;
+  questionId: number;
+};
+
 // Reusable components
 
-const Header = ({ user }: any) => (
+const Header = ({ user }: { user: User }) => (
   <div className="sticky top-0 z-50 border-b border-gray-800 bg-[#1b1c1d] backdrop-blur-sm">
     <div className="max-w-6xl mx-auto px-6 py-6">
       <div className="flex items-center justify-between">
@@ -206,9 +221,9 @@ const HomePage = ({ user }: QuizProgressAppProps) => {
         
         // Convert to progress format - if questionId exists in response, it's solved
         const progressMap: Record<number, boolean> = {};
-        solvedStatuses.forEach((status: any) => {
+        solvedStatuses.forEach((status: Status) => {
           // Convert questionId string to number and mark as solved
-          progressMap[parseInt(status.questionId)] = true;
+          progressMap[(status.questionId)] = true;
         });
         
         setUserProgress(progressMap);

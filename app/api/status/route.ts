@@ -50,14 +50,17 @@ export async function POST(req: Request) {
       result,
       insertedCount: result.count,
     });
-  } catch (error: any) {
-    console.error("Error creating status:", error);
+  } catch (error: unknown) {
+  console.error("Error creating status:", error);
 
-    return NextResponse.json({
-      error: "Internal Server Error",
-      details: error?.message || error.toString(),
-    }, { status: 500 });
-  }
+  const message = error instanceof Error ? error.message : String(error);
+
+  return NextResponse.json({
+    error: "Internal Server Error",
+    details: message,
+  }, { status: 500 });
+}
+
 }
 
 // GET handler

@@ -5,8 +5,14 @@ import { useRouter } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
 import clsx from "clsx";
 import Image from "next/image";
+type User = {
+  id?: string;
+  name?: string;
+  email?: string;
+  image?: string;
+};
 
-const HeaderUserInfo = ({ user }: { user: any }) => {
+const HeaderUserInfo = ({ user }: { user: User }) => {
   const [confirming, setConfirming] = useState(false);
   const [loggingOut, setLoggingOut] = useState(false);
   const [hovered, setHovered] = useState(false);

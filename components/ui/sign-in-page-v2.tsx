@@ -6,10 +6,18 @@ import { signIn } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import logo from "@/public/logo.png"; // Adjust the path
 
+  type Ripple = {
+  id: number;
+  x: number;
+  y: number;
+  size: number;
+};
+
+
 export default function SignInUI() {
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
-  const [ripples, setRipples] = useState<any[]>([]);
+  const [ripples, setRipples] = useState<Ripple[]>([]);
   const searchParams = useSearchParams();
   const error = searchParams.get("error");
 
