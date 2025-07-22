@@ -209,8 +209,8 @@ const HomePage = ({ user }: QuizProgressAppProps) => {
         
         // Fetch questions and user status in parallel
         const [questionsResponse, statusResponse] = await Promise.all([
-          axios.get('http://localhost:3000/api/questions'),
-          axios.get(`http://localhost:3000/api/status?userId=${user?.id}`)
+          axios.get('https://trackx-nu.vercel.app/api/questions'),
+          axios.get(`https://trackx-nu.vercel.app/api/status?userId=${user?.id}`)
         ]);
         
         setQuestions(questionsResponse.data);
@@ -320,7 +320,7 @@ const commitChanges = useCallback(async () => {
 
     try {
       setIsCommitting(true);
-      await axios.post('http://localhost:3000/api/status', {
+      await axios.post('https://trackx-nu.vercel.app/api/status', {
         userId: user.id,
         questionIds
       });
